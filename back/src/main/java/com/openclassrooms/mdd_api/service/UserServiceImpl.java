@@ -1,10 +1,12 @@
 package com.openclassrooms.mdd_api.service;
 
 import com.openclassrooms.mdd_api.dto.RegisterRequestDto;
+import com.openclassrooms.mdd_api.exception.ResourceNotFoundException;
 import com.openclassrooms.mdd_api.exception.UserAlreadyRegisteredException;
 import com.openclassrooms.mdd_api.model.User;
 import com.openclassrooms.mdd_api.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +49,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public Optional<User> findUserByMail(String email) {
         return this.userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User getLoggedUser() throws ResourceNotFoundException {
+       return this.findUserByMail(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow(ResourceNotFoundException::new);
     }
 
     private void isUserAlreadyRegister(String email) throws UserAlreadyRegisteredException {

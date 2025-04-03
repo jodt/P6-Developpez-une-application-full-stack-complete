@@ -1,6 +1,7 @@
 package com.openclassrooms.mdd_api.service;
 
 import com.openclassrooms.mdd_api.dto.RegisterRequestDto;
+import com.openclassrooms.mdd_api.exception.ResourceNotFoundException;
 import com.openclassrooms.mdd_api.exception.UserAlreadyRegisteredException;
 import com.openclassrooms.mdd_api.model.User;
 
@@ -13,5 +14,7 @@ public interface UserService {
     User updateUser(User user);
 
     Optional<User> findUserByMail(String email);
+
+    User getLoggedUser() throws ResourceNotFoundException;
 
 }
