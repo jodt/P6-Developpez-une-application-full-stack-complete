@@ -1,9 +1,11 @@
 package com.openclassrooms.mdd_api.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDate;
 
+@Data
 @Entity
 public class Comment {
 
