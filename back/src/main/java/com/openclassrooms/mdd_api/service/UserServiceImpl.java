@@ -56,6 +56,11 @@ public class UserServiceImpl implements UserService{
        return this.findUserByMail(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow(ResourceNotFoundException::new);
     }
 
+    /**
+     * Check if user is already registered
+     * @param email user's email
+     * @throws UserAlreadyRegisteredException if user is already registered
+     */
     private void isUserAlreadyRegister(String email) throws UserAlreadyRegisteredException {
         Optional<User> user = this.userRepository.findByEmail(email);
         if (user.isPresent()) {
