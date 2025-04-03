@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UserAlreadyRegisteredException.class)
     public ResponseEntity<String> handleUserAlreadyRegisteredException(UserAlreadyRegisteredException ex) {
-        return new ResponseEntity<>("user already registered", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("user already registered", HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(BadRequestException.class)
