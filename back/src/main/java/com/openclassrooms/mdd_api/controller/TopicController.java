@@ -1,6 +1,7 @@
 package com.openclassrooms.mdd_api.controller;
 
 import com.openclassrooms.mdd_api.dto.TopicDto;
+import com.openclassrooms.mdd_api.dto.UserTopicsSubscribedDto;
 import com.openclassrooms.mdd_api.exception.BadRequestException;
 import com.openclassrooms.mdd_api.exception.ResourceNotFoundException;
 import com.openclassrooms.mdd_api.service.TopicService;
@@ -24,6 +25,11 @@ public class TopicController {
     @GetMapping
     List<TopicDto> findAll() throws ResourceNotFoundException {
         return this.topicService.findAll();
+    }
+
+    @GetMapping("/subscribed")
+    List<UserTopicsSubscribedDto> findSubscribedTopics() throws ResourceNotFoundException {
+        return this.topicService.getSubscribedTopicsByUser();
     }
 
     @PostMapping("/{topicId}")

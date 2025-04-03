@@ -1,6 +1,7 @@
 package com.openclassrooms.mdd_api.service;
 
 import com.openclassrooms.mdd_api.dto.TopicDto;
+import com.openclassrooms.mdd_api.dto.UserTopicsSubscribedDto;
 import com.openclassrooms.mdd_api.exception.BadRequestException;
 import com.openclassrooms.mdd_api.exception.ResourceNotFoundException;
 import com.openclassrooms.mdd_api.model.Topic;
@@ -32,7 +33,6 @@ public class TopicServiceImpl implements TopicService {
 
         List<Topic> topics = this.topicRepository.findAll();
 
-
         return mapTopicsToDtosWithSubscriptionStatus(topics, userLogged);
     }
 
@@ -51,8 +51,24 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public List<Topic> getSubscribedTopicsByUser(Long userId) {
-        return null;
+    public List<UserTopicsSubscribedDto> getSubscribedTopicsByUser() throws ResourceNotFoundException {
+        User userLogged = userService.findUserByMail(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow(ResourceNotFoundException::new);
+
+        List<Topic> topics = this.topicRepository.findAll();
+
+        return mapTopicsToDtos(topics, userLogged);
+    }
+
+    private List<UserTopicsSubscribedDto> mapTopicsToDtos(List<Topic> topics, User userLogged) {
+        return topics.stream().filter(
+                topic -> userLogged.getTopics().contains(topic)
+        ).map(
+                topic -> UserTopicsSubscribedDto.builder()
+                        .id(topic.getId())
+                        .title(topic.getTitle())
+                        .description(topic.getDescription())
+                        .build()
+        ).toList();
     }
 
     @Override
