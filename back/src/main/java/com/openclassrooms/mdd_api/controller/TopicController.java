@@ -1,14 +1,16 @@
 package com.openclassrooms.mdd_api.controller;
 
 import com.openclassrooms.mdd_api.dto.TopicDto;
+import com.openclassrooms.mdd_api.exception.BadRequestException;
 import com.openclassrooms.mdd_api.exception.ResourceNotFoundException;
 import com.openclassrooms.mdd_api.service.TopicService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("api/topic")
 public class TopicController {
@@ -22,6 +24,14 @@ public class TopicController {
     @GetMapping
     List<TopicDto> findAll() throws ResourceNotFoundException {
         return this.topicService.findAll();
+    }
+
+    @PostMapping("/{topicId}")
+    ResponseEntity<?> subscribe(@PathVariable Long topicId) throws ResourceNotFoundException, BadRequestException {
+        log.info("POST api/topic/{} called -> start the process to subscribe topic", topicId);
+        this.topicService.subscribeTopic(topicId);
+        log.info("Process terminated successfully");
+        return ResponseEntity.ok().build();
     }
 
 }

@@ -1,6 +1,7 @@
 package com.openclassrooms.mdd_api.service;
 
 import com.openclassrooms.mdd_api.dto.TopicDto;
+import com.openclassrooms.mdd_api.exception.BadRequestException;
 import com.openclassrooms.mdd_api.exception.ResourceNotFoundException;
 import com.openclassrooms.mdd_api.model.Topic;
 
@@ -12,7 +13,7 @@ public interface TopicService {
 
     List<Topic> getSubscribedTopicsByUser(Long userId);
 
-    void subscribeTopic(Long topicId);
+    void subscribeTopic(Long topicId) throws ResourceNotFoundException, BadRequestException;
 
     void unsubscribeTopic(Long topicId);
 

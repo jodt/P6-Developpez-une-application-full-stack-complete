@@ -19,4 +19,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>("user already registered", HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<String> handleBadRequestException(BadRequestException ex) {
+        return new ResponseEntity<>("Bad request", HttpStatus.BAD_REQUEST);
+    }
+
 }

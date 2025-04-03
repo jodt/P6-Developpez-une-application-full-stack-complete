@@ -1,19 +1,23 @@
 package com.openclassrooms.mdd_api.service;
 
 import com.openclassrooms.mdd_api.dto.TopicDto;
+import com.openclassrooms.mdd_api.exception.BadRequestException;
 import com.openclassrooms.mdd_api.exception.ResourceNotFoundException;
 import com.openclassrooms.mdd_api.model.Topic;
 import com.openclassrooms.mdd_api.model.User;
 import com.openclassrooms.mdd_api.repository.TopicRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
-public class TopicServiceImpl implements TopicService{
+public class TopicServiceImpl implements TopicService {
 
     private final TopicRepository topicRepository;
+
     private final UserService userService;
 
     public TopicServiceImpl(TopicRepository topicRepository, UserService userService) {
@@ -52,8 +56,24 @@ public class TopicServiceImpl implements TopicService{
     }
 
     @Override
-    public void subscribeTopic(Long topicId) {
+    public void subscribeTopic(Long topicId) throws ResourceNotFoundException, BadRequestException {
 
+        log.info("Try to subscribe to topic with id {}", topicId);
+
+        User userLogged = userService.findUserByMail(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow(ResourceNotFoundException::new);
+        Topic topic = this.topicRepository.findById(topicId).orElseThrow(ResourceNotFoundException::new);
+
+
+        boolean hasAlreadySubscribed = userLogged.getTopics().contains(topic);
+
+        if (hasAlreadySubscribed) {
+            log.error("User is already subscribed");
+            throw new BadRequestException();
+        }
+
+        userLogged.getTopics().add(topic);
+        this.userService.updateUser(userLogged);
+        log.info("User {}'s subscription to the topic {} has been successfully added", userLogged.getUserName(), topicId);
     }
 
     @Override

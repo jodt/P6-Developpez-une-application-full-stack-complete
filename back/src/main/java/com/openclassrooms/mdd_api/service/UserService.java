@@ -10,6 +10,8 @@ public interface UserService {
 
     User addUser(RegisterRequestDto registerRequest) throws UserAlreadyRegisteredException;
 
+    User updateUser(User user);
+
     Optional<User> findUserByMail(String email);
 
 }
