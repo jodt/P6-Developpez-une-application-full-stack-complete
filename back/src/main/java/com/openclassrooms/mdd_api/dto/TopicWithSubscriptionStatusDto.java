@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TopicDto {
+public class TopicWithSubscriptionStatusDto {
 
     Long id;
 

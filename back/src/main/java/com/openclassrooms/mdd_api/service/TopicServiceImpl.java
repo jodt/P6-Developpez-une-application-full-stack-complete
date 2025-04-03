@@ -1,6 +1,6 @@
 package com.openclassrooms.mdd_api.service;
 
-import com.openclassrooms.mdd_api.dto.TopicDto;
+import com.openclassrooms.mdd_api.dto.TopicWithSubscriptionStatusDto;
 import com.openclassrooms.mdd_api.dto.UserTopicsSubscribedDto;
 import com.openclassrooms.mdd_api.exception.BadRequestException;
 import com.openclassrooms.mdd_api.exception.ResourceNotFoundException;
@@ -8,7 +8,6 @@ import com.openclassrooms.mdd_api.model.Topic;
 import com.openclassrooms.mdd_api.model.User;
 import com.openclassrooms.mdd_api.repository.TopicRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +32,7 @@ public class TopicServiceImpl implements TopicService {
      * @throws ResourceNotFoundException if user not found
      */
     @Override
-    public List<TopicDto> findAll() throws ResourceNotFoundException {
+    public List<TopicWithSubscriptionStatusDto> findAllTopicsWithSubscriptionStatus() throws ResourceNotFoundException {
 
         User userLogged = userService.getLoggedUser();
 
@@ -48,11 +47,11 @@ public class TopicServiceImpl implements TopicService {
      * @param userLogged user logged into the application
      * @return List of topicDto including user subscription status
      */
-    private List<TopicDto> mapTopicsToDtosWithSubscriptionStatus(List<Topic> topics, User userLogged) {
-        List<TopicDto> topicDtos = topics.stream().map(topic -> {
+    private List<TopicWithSubscriptionStatusDto> mapTopicsToDtosWithSubscriptionStatus(List<Topic> topics, User userLogged) {
+        List<TopicWithSubscriptionStatusDto> topicDtos = topics.stream().map(topic -> {
             boolean hasAlreadySubscribed = userLogged.getTopics().contains(topic);
 
-            return TopicDto.builder()
+            return TopicWithSubscriptionStatusDto.builder()
                     .id(topic.getId())
                     .description(topic.getDescription())
                     .title(topic.getTitle())
