@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -148,6 +149,11 @@ public class TopicServiceImpl implements TopicService {
         this.userService.updateUser(userLogged);
         log.info("User {} unsubscribed from topic {} successfully", userLogged.getUserName(), topicId);
 
+    }
+
+    @Override
+    public Optional<Topic> findTopicById(Long topicId) {
+        return this.topicRepository.findById(topicId);
     }
 
     private Topic getTopicById(Long topicId) throws ResourceNotFoundException {
