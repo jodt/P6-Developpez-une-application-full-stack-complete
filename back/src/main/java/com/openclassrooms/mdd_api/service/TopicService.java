@@ -1,5 +1,6 @@
 package com.openclassrooms.mdd_api.service;
 
+import com.openclassrooms.mdd_api.dto.TopicDto;
 import com.openclassrooms.mdd_api.dto.TopicWithSubscriptionStatusDto;
 import com.openclassrooms.mdd_api.dto.UserTopicsSubscribedDto;
 import com.openclassrooms.mdd_api.exception.BadRequestException;
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 public interface TopicService {
 
+    List<TopicDto> findAllTopic();
     List<TopicWithSubscriptionStatusDto> findAllTopicsWithSubscriptionStatus() throws ResourceNotFoundException;
 
     List<UserTopicsSubscribedDto> getSubscribedTopicsByUser() throws ResourceNotFoundException;

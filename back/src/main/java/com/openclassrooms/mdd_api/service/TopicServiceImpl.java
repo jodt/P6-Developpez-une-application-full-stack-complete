@@ -1,9 +1,11 @@
 package com.openclassrooms.mdd_api.service;
 
+import com.openclassrooms.mdd_api.dto.TopicDto;
 import com.openclassrooms.mdd_api.dto.TopicWithSubscriptionStatusDto;
 import com.openclassrooms.mdd_api.dto.UserTopicsSubscribedDto;
 import com.openclassrooms.mdd_api.exception.BadRequestException;
 import com.openclassrooms.mdd_api.exception.ResourceNotFoundException;
+import com.openclassrooms.mdd_api.mapper.TopicMapper;
 import com.openclassrooms.mdd_api.model.Topic;
 import com.openclassrooms.mdd_api.model.User;
 import com.openclassrooms.mdd_api.repository.TopicRepository;
@@ -18,12 +20,19 @@ import java.util.Optional;
 public class TopicServiceImpl implements TopicService {
 
     private final TopicRepository topicRepository;
-
     private final UserService userService;
 
-    public TopicServiceImpl(TopicRepository topicRepository, UserService userService) {
+    private final TopicMapper topicMapper;
+
+    public TopicServiceImpl(TopicRepository topicRepository, UserService userService, TopicMapper topicMapper) {
         this.topicRepository = topicRepository;
         this.userService = userService;
+        this.topicMapper = topicMapper;
+    }
+
+    @Override
+    public List<TopicDto> findAllTopic() {
+        return this.topicMapper.asTopicDtos(this.topicRepository.findAll());
     }
 
     /**
