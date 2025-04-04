@@ -1,0 +1,10 @@
+<mat-toolbar class="toolbar">
+    <img class="logo" src="logo_p6.png" alt="logo">
+    @if (isLogged$ | async) {
+    <div class="links">
+        <a class="logout-link link">Se deconnecter</a>
+        <a class="link">Articles</a>
+        <a class="link">Themes</a>
+    </div>
+    }
+</mat-toolbar>
