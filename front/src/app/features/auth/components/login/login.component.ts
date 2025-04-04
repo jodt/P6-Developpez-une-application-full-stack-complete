@@ -23,7 +23,6 @@ export class LoginComponent {
     private initForm() {
       this.loginForm = this.formBuilder.group({
         userName:["", [Validators.required]],
-        email:["", [Validators.required]],
         password:["", [Validators.required]]
       })
     }
@@ -34,7 +33,7 @@ export class LoginComponent {
         this.authService.login(loginrequest).subscribe((response:AuthSuccess) => {
         localStorage.setItem('token', response.token);
         this.sessionService.login();
-        this.router.navigate(['/posts'])
+        this.router.navigate(['/post/list'])
        })
       } else {
         this.loginForm.markAllAsTouched();
