@@ -1,10 +1,9 @@
-<mat-toolbar class="toolbar">
+<mat-toolbar class="toolbar" *ngIf="showToolbar">
     <img class="logo" src="logo_p6.png" alt="logo">
-    @if (isLogged$ | async) {
-    <div class="links">
-        <a class="logout-link link">Se deconnecter</a>
+    <div *ngIf="isLogged" class="links">
+        <button (click)="logout()" class="logout-link link">Se déconnecter</button>
         <a class="link">Articles</a>
         <a class="link">Themes</a>
+        <a class="link">{{isLogged}}</a>
     </div>
-    }
 </mat-toolbar>
