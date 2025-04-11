@@ -8,6 +8,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
 import { DetailComponent } from './components/detail/detail.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatCardModule,
     MatGridListModule,
     MatButtonModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
   ]
 })
 export class PostsModule { }
