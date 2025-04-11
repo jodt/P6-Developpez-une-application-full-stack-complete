@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Post } from '../interfaces/post';
+import { Post } from '../interfaces/post.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -14,5 +14,9 @@ export class PostService {
 
   public getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.pathService}`);
+  }
+
+  public getPostById(id: string): Observable<Post> {
+    return this.http.get<Post>(`${this.pathService}/${id}`)
   }
 }
