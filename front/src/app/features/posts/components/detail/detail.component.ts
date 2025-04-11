@@ -53,4 +53,8 @@ export class DetailComponent implements OnInit {
       this.post$ = this.postService.getPostById(this.postId);
     }
   }
+
+  public goBack(){
+    window.history.back();
+  }
 }
