@@ -1,0 +1,30 @@
+@if(post$|async; as post) {
+    <div class="post-detail">
+        <div class="title">
+            <h2>{{post.title}}</h2>
+        </div>
+        <div class="post-info">
+            <div>{{post.createdAt | date:'dd-MM-yyyy'}} </div>
+            <div>{{post.author}}</div>
+            <div>{{post.topic}}</div>
+        </div>
+        <div class="content">
+            <p>{{post.content}}</p>
+            <hr>
+        </div>
+        @if(post.comments; as comments) {
+        @for (comment of comments; track $index) {
+        <div class="comment">
+            <div class="author">{{comment.author}}</div>
+            <mat-card class="card">
+                <mat-card-content>
+                    <p>{{comment.content}}</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        } @empty {
+        <p>Aucun commentaire pour le moment</p>
+        }
+        }
+    </div>
+}

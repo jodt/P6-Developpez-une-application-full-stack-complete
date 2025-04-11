@@ -1,0 +1,36 @@
+.post-detail {
+  width: 90%;
+  height: auto;
+  margin: 2% auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.title {
+  display: flex;
+  justify-content: space-around;
+}
+
+.post-info {
+  display: flex;
+  justify-content: flex-start;
+  gap: 50px;
+}
+
+hr {
+  margin-top: 2%;
+}
+
+.comment {
+  width: 100%;
+  margin-top: 2%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.card {
+  flex: 0 1 50%;
+  min-height: 100px;
+}
