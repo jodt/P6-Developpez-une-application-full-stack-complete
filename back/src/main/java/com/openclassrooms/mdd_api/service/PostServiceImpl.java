@@ -1,7 +1,9 @@
 package com.openclassrooms.mdd_api.service;
 
+import com.openclassrooms.mdd_api.dto.CommentDto;
 import com.openclassrooms.mdd_api.dto.CreatePostDto;
 import com.openclassrooms.mdd_api.dto.PostDto;
+import com.openclassrooms.mdd_api.dto.PostWithCommentsDto;
 import com.openclassrooms.mdd_api.exception.ResourceNotFoundException;
 import com.openclassrooms.mdd_api.mapper.PostMapper;
 import com.openclassrooms.mdd_api.model.Post;
@@ -11,6 +13,7 @@ import com.openclassrooms.mdd_api.repository.PostRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.xml.stream.events.Comment;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -37,9 +40,9 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDto findPostDtoById(Long postId) throws ResourceNotFoundException {
+    public PostWithCommentsDto findPostDtoById(Long postId) throws ResourceNotFoundException {
         Post post = this.findPostById(postId).orElseThrow(ResourceNotFoundException::new);
-        return this.postMapper.asPostDto(post);
+        return this.postMapper.asPostWithCommentDto(post);
     }
 
     /**
