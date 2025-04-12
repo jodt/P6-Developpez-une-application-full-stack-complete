@@ -32,6 +32,7 @@
         }
         <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
             <mat-form-field appearance="outline">
+                <mat-label>Ecrivez ici votre commentaire</mat-label>
                 <textarea matInput cols="30" rows="5" formControlName="content"></textarea>
                 @if(commentForm.get('content')?.hasError('required') && commentForm.get('content')?.touched){
                     <mat-error>Ne peut pas être vide</mat-error>
