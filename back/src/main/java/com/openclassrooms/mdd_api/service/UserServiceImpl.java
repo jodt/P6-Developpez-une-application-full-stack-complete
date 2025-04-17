@@ -1,8 +1,10 @@
 package com.openclassrooms.mdd_api.service;
 
 import com.openclassrooms.mdd_api.dto.RegisterRequestDto;
+import com.openclassrooms.mdd_api.dto.UserDto;
 import com.openclassrooms.mdd_api.exception.ResourceNotFoundException;
 import com.openclassrooms.mdd_api.exception.UserAlreadyRegisteredException;
+import com.openclassrooms.mdd_api.mapper.UserMapper;
 import com.openclassrooms.mdd_api.model.User;
 import com.openclassrooms.mdd_api.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +12,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 @Slf4j
@@ -21,9 +22,12 @@ public class UserServiceImpl implements UserService{
 
     private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    private final UserMapper userMapper;
+
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -54,6 +58,12 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getLoggedUser() throws ResourceNotFoundException {
        return this.findUserByMail(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow(ResourceNotFoundException::new);
+    }
+
+    @Override
+    public UserDto findUser() throws ResourceNotFoundException {
+       User user = this.getLoggedUser();
+       return this.userMapper.asUserDto(user);
     }
 
     /**
