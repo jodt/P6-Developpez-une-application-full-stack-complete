@@ -12,7 +12,10 @@
             <mat-label>Email</mat-label>
             <input matInput formControlName="email">
             @if(profileForm.get('email')?.hasError("required") && profileForm.get('email')?.touched) {
-            <mat-error>Champs obligatoire</mat-error>
+                <mat-error>Champs obligatoire</mat-error>
+            }
+            @if(profileForm.get('email')?.hasError("emailTaken") && profileForm.get('email')?.touched) {
+                <mat-error>Cet email appartient déjà à un compte</mat-error>
             }
         </mat-form-field>
         <mat-form-field appearance="outline">
@@ -20,7 +23,7 @@
             <input matInput type="password" formControlName="password">
             @if(profileForm.get('password')?.hasError("required") && profileForm.get('password')?.touched) {
                 <mat-error>Champs obligatoire</mat-error>
-                }
+            }
         </mat-form-field>
         <div class="button-container">
             <button type="submit" mat-raised-button color="primary">Sauvegarder</button>
