@@ -32,7 +32,11 @@ private ngUnsubscribe$ = new Subject<boolean>();
 
   private initForm(){
     this.profileForm = this.formBuilder.group({
-      username:[this.user?.userName ? this.user?.userName : "", Validators.required],
+      username:[this.user?.userName ? this.user?.userName : "", {
+        validators: [Validators.required],
+        asyncValidators: [this.customValidatorService.userNameTakenValidator()],
+        updateOn:'blur'
+      }],
       email:[this.user?.email ? this.user.email : "", {
         validators: [Validators.required, Validators.email],
         asyncValidators: [this.customValidatorService.emailTakenValidator()],

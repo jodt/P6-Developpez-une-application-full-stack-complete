@@ -29,6 +29,10 @@ export class AuthService {
   }
 
   public checkIfEmaiIslAlreadyTaken(email:string): Observable<boolean>{
-    return this.http.get<boolean>(`${this.pathService}/${email}`);
+    return this.http.get<boolean>(`${this.pathService}/email/${email}`);
+  }
+
+  public checkIfUserNameIslAlreadyTaken(userName:string): Observable<boolean>{
+    return this.http.get<boolean>(`${this.pathService}/username/${userName}`);
   }
 }
