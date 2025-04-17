@@ -70,9 +70,14 @@ public class AuthenticationController {
         return  user;
     }
 
-    @GetMapping("/{userMail}")
+    @GetMapping("email/{userMail}")
     public Boolean checkIfEmailAlreadyTaken(@PathVariable String userMail){
         return this.userService.isEmailAlreadyTaken(userMail);
+    }
+
+    @GetMapping("username/{userName}")
+    public Boolean checkIfUserNameAlreadyTaken(@PathVariable String userName){
+        return this.userService.isUserNameAlreadyTaken(userName);
     }
 
 }
