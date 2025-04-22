@@ -53,4 +53,8 @@ export class NewPostComponent implements OnInit {
       this.newPostForm.markAllAsTouched();
     }
   }
+
+  public goBack(){
+    window.history.back();
+  }
 }
