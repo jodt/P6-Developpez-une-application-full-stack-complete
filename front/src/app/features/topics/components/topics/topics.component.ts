@@ -22,7 +22,7 @@ export class TopicsComponent implements OnInit{
   }
 
   public subscribe(topicId:string):void {
-    this.topicService.subsribe(topicId)
+    this.topicService.topicSubscribe(topicId)
     .pipe(take(1))
     .subscribe(
       repoonse => {
