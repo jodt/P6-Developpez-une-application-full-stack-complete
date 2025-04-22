@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   showToolbar: boolean = true;
   isMobileResolution = false;
   isLogged: boolean = false;
+  showMenu: boolean = false;
 
   constructor(private sessionService: SessionService, private router: Router, private mobileService: MobileService
   ) {}
@@ -41,5 +42,9 @@ export class HeaderComponent implements OnInit {
 
   private isMobile() {
     this.isMobileResolution = this.mobileService.isMobile();
+  }
+
+  public onToggleMenu () {
+    this.showMenu = !this.showMenu;
   }
 }
