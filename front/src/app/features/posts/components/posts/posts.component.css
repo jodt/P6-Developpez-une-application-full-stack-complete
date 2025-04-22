@@ -1,4 +1,4 @@
-.posts {
+#posts {
   width: 95%;
   height: auto;
   margin: 2% auto;
@@ -58,4 +58,18 @@ button {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 auto;
+  }
+
+  .buttons-container {
+    flex-direction: column;
+  }
+  
+  button {
+    align-self: center;
+  }
 }
