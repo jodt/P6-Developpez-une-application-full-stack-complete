@@ -73,6 +73,10 @@ hr {
     button {
       flex: 0 0 50%
   }
+
+  .topics-container {
+    flex-direction: column;
+  }
   }
   
 
