@@ -57,4 +57,23 @@ hr {
     text-overflow: ellipsis;
   }
 
+  @media (max-width: 768px) {
+    #profile {
+      width: 100%;
+    }
+
+    form {
+      width: 90%;
+    }
+
+    .card {
+      flex: 1 1 auto;
+    }
+
+    button {
+      flex: 0 0 50%
+  }
+  }
+  
+
   
