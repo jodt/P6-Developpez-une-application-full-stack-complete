@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-
 import { CustomValidatorService } from './custom-validator.service';
+
+
 
 describe('EmailValidatorService', () => {
   let service: CustomValidatorService;
