@@ -56,6 +56,10 @@ hr {
     text-overflow: ellipsis;
   }
 
+  .info-message {
+    text-align: center;
+  }
+
   @media (max-width: 768px) {
     #profile {
       width: 100%;
@@ -78,7 +82,7 @@ hr {
     flex-direction: column;
     flex-wrap: nowrap;
   }
-  }
+}
   
 
   
