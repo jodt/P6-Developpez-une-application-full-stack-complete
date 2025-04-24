@@ -43,6 +43,11 @@ h2 {
   .arrow {
     top: 0;
   }
+
+  button {
+    width: 50%;
+    margin-top: 12%;
+  }
 }
 
 

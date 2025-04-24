@@ -76,13 +76,13 @@ hr {
     button {
       flex: 0 0 50%;
       margin-top: 8%;
-  }
-
-  .topics-container {
+    }
+    
+    .topics-container {
     flex-direction: column;
     flex-wrap: nowrap;
+    }
   }
-}
   
 
   
