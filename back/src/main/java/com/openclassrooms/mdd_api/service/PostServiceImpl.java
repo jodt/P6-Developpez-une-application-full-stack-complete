@@ -47,6 +47,7 @@ public class PostServiceImpl implements PostService {
 
     /**
      * Retrieve all posts from topics the user is subscribed to
+     *
      * @return list of postDto
      * @throws ResourceNotFoundException if user not found
      */
@@ -65,6 +66,12 @@ public class PostServiceImpl implements PostService {
     }
 
 
+    /**
+     * save a new post
+     *
+     * @param newPost new post to save
+     * @throws ResourceNotFoundException if user not found
+     */
     @Override
     public void createPost(CreatePostDto newPost) throws ResourceNotFoundException {
         User user = this.userService.getLoggedUser();

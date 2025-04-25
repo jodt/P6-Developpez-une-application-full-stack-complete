@@ -20,6 +20,7 @@ import java.util.Optional;
 public class TopicServiceImpl implements TopicService {
 
     private final TopicRepository topicRepository;
+
     private final UserService userService;
 
     private final TopicMapper topicMapper;
@@ -30,6 +31,17 @@ public class TopicServiceImpl implements TopicService {
         this.topicMapper = topicMapper;
     }
 
+    /**
+     * Retrieve a topic by its ID
+     *
+     * @param topicId
+     * @return an optional containing the topic if found
+     */
+    @Override
+    public Optional<Topic> findTopicById(Long topicId) {
+        return this.topicRepository.findById(topicId);
+    }
+
     @Override
     public List<TopicDto> findAllTopic() {
         return this.topicMapper.asTopicDtos(this.topicRepository.findAll());
@@ -37,6 +49,7 @@ public class TopicServiceImpl implements TopicService {
 
     /**
      * Retrieve list of all topics
+     *
      * @return list of topicDto
      * @throws ResourceNotFoundException if user not found
      */
@@ -52,6 +65,7 @@ public class TopicServiceImpl implements TopicService {
 
     /**
      * Map all topics to dto including user subscription status
+     *
      * @param topics list of all topics
      * @param userLogged user logged into the application
      * @return List of topicDto including user subscription status
@@ -72,6 +86,7 @@ public class TopicServiceImpl implements TopicService {
 
     /**
      * Retrieve all topics a user is subscribed to
+     *
      * @return list of UserTopicsSubscribedDto
      * @throws ResourceNotFoundException if user not found
      */
@@ -88,6 +103,7 @@ public class TopicServiceImpl implements TopicService {
     /**
      * Filter the list of all topics to keep only those for
      * which a user is subscribed and maps them to dto
+     *
      * @param topics List of all topics
      * @param userLogged user logged into the application
      * @return list of topicDto for which a user is subscribed
@@ -106,6 +122,7 @@ public class TopicServiceImpl implements TopicService {
 
     /**
      * Allow subscribing to a topic
+     *
      * @param topicId topic's id
      * @throws ResourceNotFoundException if user or topic not found
      * @throws BadRequestException if user is already subscribed
@@ -133,6 +150,7 @@ public class TopicServiceImpl implements TopicService {
 
     /**
      * Allow unsubscribing from a topic
+     *
      * @param topicId topic'id
      * @throws ResourceNotFoundException if user or topic not found
      * @throws BadRequestException if user is not subscribed
@@ -157,11 +175,6 @@ public class TopicServiceImpl implements TopicService {
         this.userService.updateUser(userLogged);
         log.info("User {} unsubscribed from topic {} successfully", userLogged.getUserName(), topicId);
 
-    }
-
-    @Override
-    public Optional<Topic> findTopicById(Long topicId) {
-        return this.topicRepository.findById(topicId);
     }
 
     private Topic getTopicById(Long topicId) throws ResourceNotFoundException {
