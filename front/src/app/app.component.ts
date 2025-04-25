@@ -20,12 +20,15 @@ export class AppComponent implements OnInit {
 
   private autolog () {
     if (localStorage.getItem("token")){
-      this.authService.getUserInfo().subscribe(
-        response => {
+      this.authService.getUserInfo().subscribe({
+        next: response => {
           this.sessionService.login(response);
-          this.router.navigate(['post/list']);
+        },
+        error: err => {
+          this.sessionService.logOut();
+          this.router.navigate(['/auth/login']);
         }
-      )
+      })
     }
   }
 }
