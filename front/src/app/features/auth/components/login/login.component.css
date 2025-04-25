@@ -35,7 +35,7 @@
   .arrow{
     position: absolute;
   }
-
+  
   .error {
     margin-top: 2%;
     font-size: 1.2em;
@@ -50,6 +50,11 @@
 
     .arrow {
       top: 0;
+    }
+
+    svg {
+      height: 80px;
+      width: 80px;
     }
 
     h2 {

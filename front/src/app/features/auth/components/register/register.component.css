@@ -44,6 +44,11 @@ h2 {
     top: 0;
   }
 
+  svg {
+    height: 80px;
+    width: 80px;
+  }
+
   button {
     width: 50%;
     margin-top: 12%;
