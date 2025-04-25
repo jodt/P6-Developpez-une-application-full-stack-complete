@@ -1,7 +1,7 @@
 INSERT IGNORE INTO `user` (id, email, user_name, password)
-VALUES (1, 'joe@gmail.com','jojo','$2a$10$.Hsa/ZjUVaHqi0tp9xieMeewrnZxrZ5pQRzddUXE/WjDu2ZThe6Iq'),
-       (2, 'david@gmail.com','david','$2a$10$.Hsa/ZjUVaHqi0tp9xieMeewrnZxrZ5pQRzddUXE/WjDu2ZThe6Iq'),
-       (3, 'christophe@gmail.com','cricri','$2a$10$.Hsa/ZjUVaHqi0tp9xieMeewrnZxrZ5pQRzddUXE/WjDu2ZThe6Iq');
+VALUES (1, 'joe@gmail.com','jojo','$2a$10$OEoMfE6/JEwOXqrkj10Veu4.vMRX25ePdeJ4IiJpuL7q0LobJ6Cry'),
+       (2, 'david@gmail.com','david','$2a$10$OEoMfE6/JEwOXqrkj10Veu4.vMRX25ePdeJ4IiJpuL7q0LobJ6Cry'),
+       (3, 'christophe@gmail.com','cricri','$2a$10$OEoMfE6/JEwOXqrkj10Veu4.vMRX25ePdeJ4IiJpuL7q0LobJ6Cry');
 
 INSERT IGNORE INTO `topic` (id, title,  description)
 VALUES (1, 'Java', 'Java language'),
