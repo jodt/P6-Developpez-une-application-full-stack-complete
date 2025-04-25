@@ -34,6 +34,8 @@
 
   .arrow{
     position: absolute;
+    background-color: white;
+    border: none;
   }
   
   .error {
@@ -41,6 +43,7 @@
     font-size: 1.2em;
     color: #ba1a1a;
   }
+
 
   @media (max-width: 768px) {
     #login {
@@ -61,7 +64,7 @@
       margin-bottom: 10%;
     }
 
-    button {
+    .login-button {
       margin-top: 8%;
     }
 

@@ -52,6 +52,7 @@ export class LoginComponent {
       }
     }
 
-    
-
+    public goBack(){
+      window.history.back();
+    }
 }
