@@ -8,9 +8,9 @@ import { HomeComponent } from './components/home/home.component';
 import { NgOptimizedImage } from "@angular/common";
 import { HeaderComponent } from './shared/components/header/header.component';
 import  {MatToolbarModule } from "@angular/material/toolbar";
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { jwtInterceptor } from './interceptors/jwt.interceptor';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 
 @NgModule({
@@ -18,7 +18,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,9 +27,13 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     MatToolbarModule
   ],
   providers: [
-    provideHttpClient(withInterceptors([jwtInterceptor])),
-    provideAnimationsAsync(),
-    provideHttpClient()
+    provideHttpClient(withInterceptorsFromDi()),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor, 
+      multi: true               
+    },
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })
