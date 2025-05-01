@@ -10,13 +10,15 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import  {MatToolbarModule } from "@angular/material/toolbar";
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { jwtInterceptor } from './interceptors/jwt.interceptor';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
