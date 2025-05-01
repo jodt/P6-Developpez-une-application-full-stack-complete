@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { HomeComponent } from './shared/components/home/home.component';
+import { HomeComponent } from './components/home/home.component';
 import { NgOptimizedImage } from "@angular/common";
 import { HeaderComponent } from './shared/components/header/header.component';
 import  {MatToolbarModule } from "@angular/material/toolbar";
