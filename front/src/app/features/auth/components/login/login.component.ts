@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SessionService } from '../../../../services/session.service';
+import { SessionService } from '../../../../shared/services/session.service';
 import { AuthSuccess } from '../../interfaces/authSuccess.interface';
 import { Observable } from 'rxjs';
 import { User } from '../../interfaces/user.interface';
