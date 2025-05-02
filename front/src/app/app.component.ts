@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SessionService } from './shared/services/session.service';
 import { AuthService } from './features/auth/services/auth.service';
+import { SessionService } from './shared/services/session.service';
 
 
 @Component({
