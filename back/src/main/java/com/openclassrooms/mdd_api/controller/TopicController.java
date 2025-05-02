@@ -1,6 +1,8 @@
 package com.openclassrooms.mdd_api.controller;
 
-import com.openclassrooms.mdd_api.dto.*;
+import com.openclassrooms.mdd_api.dto.TopicDto;
+import com.openclassrooms.mdd_api.dto.TopicWithSubscriptionStatusDto;
+import com.openclassrooms.mdd_api.dto.UserTopicsSubscribedDto;
 import com.openclassrooms.mdd_api.exception.BadRequestException;
 import com.openclassrooms.mdd_api.exception.ResourceNotFoundException;
 import com.openclassrooms.mdd_api.service.TopicService;

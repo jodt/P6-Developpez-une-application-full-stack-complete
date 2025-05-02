@@ -1,6 +1,5 @@
 package com.openclassrooms.mdd_api.dto;
 
-import com.openclassrooms.mdd_api.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

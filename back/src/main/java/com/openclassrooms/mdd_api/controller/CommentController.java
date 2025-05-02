@@ -1,7 +1,6 @@
 package com.openclassrooms.mdd_api.controller;
 
 import com.openclassrooms.mdd_api.dto.CommentDto;
-import com.openclassrooms.mdd_api.dto.UserDto;
 import com.openclassrooms.mdd_api.service.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;

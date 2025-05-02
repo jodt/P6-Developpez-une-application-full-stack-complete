@@ -1,6 +1,5 @@
 package com.openclassrooms.mdd_api.controller;
 
-import com.openclassrooms.mdd_api.dto.CommentDto;
 import com.openclassrooms.mdd_api.dto.CreatePostDto;
 import com.openclassrooms.mdd_api.dto.PostDto;
 import com.openclassrooms.mdd_api.dto.PostWithCommentsDto;
@@ -20,7 +19,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Slf4j

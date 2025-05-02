@@ -1,6 +1,5 @@
 package com.openclassrooms.mdd_api.service;
 
-import com.openclassrooms.mdd_api.dto.CommentDto;
 import com.openclassrooms.mdd_api.dto.CreatePostDto;
 import com.openclassrooms.mdd_api.dto.PostDto;
 import com.openclassrooms.mdd_api.dto.PostWithCommentsDto;
@@ -13,7 +12,6 @@ import com.openclassrooms.mdd_api.repository.PostRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.xml.stream.events.Comment;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
