@@ -19,8 +19,8 @@
                 <mat-card-content class="content">
                     <div class="title">{{post.title}}</div>
                     <div class="post-info">
+                        <div>{{post.createdAt | date:'dd-MM-yyyy'}}</div>
                         <div>{{post.author}}</div>
-                        <div>{{post.createdAt}}</div>
                     </div>
                     <div class="content">
                         <p>{{post.content}}</p>
