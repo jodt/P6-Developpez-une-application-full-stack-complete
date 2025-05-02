@@ -72,6 +72,20 @@ spring.datasource.url=jdbc:mysql://localhost:3306/mdd?createDatabaseIfNotExist=t
   mvn spring-boot:run
   ```
 
+### API documentation
+
+  After launching the application, opening your browser and using the following link
+  ````
+  http://localhost:8080/swagger-ui/index.html
+  ````
+  You can now explore all available routes of API, including their descriptions, parameters, and even test endpoints directly.
+
+  To test some routes, you will need to provide an authentication token.
+
+  Obtain it using the endpoint login with a user's credentials.
+
+  Click the "Authorize" button and paste the token value. You can now test secure endpoints.
+
 ## <ins>FRONT-END</ins>
 
 ### Prerequisites
