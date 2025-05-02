@@ -6,11 +6,11 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HomeComponent } from './components/home/home.component';
 import { NgOptimizedImage } from "@angular/common";
-import { HeaderComponent } from './shared/components/header/header.component';
 import  {MatToolbarModule } from "@angular/material/toolbar";
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
+import { HeaderComponent } from './components/header/header.component';
 
 
 @NgModule({
@@ -18,7 +18,7 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    NotFoundComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
