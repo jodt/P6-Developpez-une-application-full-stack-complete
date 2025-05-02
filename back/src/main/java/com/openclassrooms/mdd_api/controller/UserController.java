@@ -1,6 +1,7 @@
 package com.openclassrooms.mdd_api.controller;
 
 import com.openclassrooms.mdd_api.dto.UserDto;
+import com.openclassrooms.mdd_api.exception.PasswordNotSecureException;
 import com.openclassrooms.mdd_api.exception.ResourceNotFoundException;
 import com.openclassrooms.mdd_api.exception.UserAlreadyRegisteredException;
 import com.openclassrooms.mdd_api.service.UserService;
@@ -31,6 +32,8 @@ public class UserController {
     @Operation(summary = "Update user", description = "Update user information")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", content = @Content),
+            @ApiResponse(responseCode = "400", content = @Content(mediaType = "text/plain",
+                    examples = @ExampleObject(value="password not secure"))),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "404", content = @Content(mediaType = "text/plain",
                     examples = @ExampleObject(value="resource not found"))),
@@ -38,7 +41,7 @@ public class UserController {
                     examples = @ExampleObject(value="user already registered")))})
     @SecurityRequirement(name = "Bearer Authentication")
     @PostMapping
-    ResponseEntity<?> updateUser(@RequestBody UserDto user) throws ResourceNotFoundException, UserAlreadyRegisteredException {
+    ResponseEntity<?> updateUser(@RequestBody UserDto user) throws ResourceNotFoundException, UserAlreadyRegisteredException, PasswordNotSecureException {
         log.info("GET api/user called -> start the process to update user");
         this.userService.updateUser(user);
         log.info(("User updated successfully"));

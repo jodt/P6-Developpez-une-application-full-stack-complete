@@ -4,6 +4,7 @@ import com.openclassrooms.mdd_api.dto.AuthSuccessDto;
 import com.openclassrooms.mdd_api.dto.LoginRequestDto;
 import com.openclassrooms.mdd_api.dto.RegisterRequestDto;
 import com.openclassrooms.mdd_api.dto.UserDto;
+import com.openclassrooms.mdd_api.exception.PasswordNotSecureException;
 import com.openclassrooms.mdd_api.exception.ResourceNotFoundException;
 import com.openclassrooms.mdd_api.exception.UserAlreadyRegisteredException;
 import com.openclassrooms.mdd_api.service.AuthenticationService;
@@ -61,12 +62,14 @@ public class AuthenticationController {
 
     @Operation(summary = "Register a new user", description = "Register a new user in the database and generate a token for them")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", content = {@Content(mediaType = "application/json",
-                    schema = @Schema(implementation = AuthSuccessDto.class))}),
+            @ApiResponse(responseCode = "200", content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = AuthSuccessDto.class))),
+            @ApiResponse(responseCode = "400", content = @Content(mediaType = "text/plain",
+                    examples = @ExampleObject(value="password not secure"))),
             @ApiResponse(responseCode = "409", content = @Content(mediaType = "text/plain",
                     examples = @ExampleObject(value="user already registered")))})
     @PostMapping("/register")
-    public ResponseEntity<AuthSuccessDto> register(@Valid @RequestBody RegisterRequestDto registerRequest) throws UserAlreadyRegisteredException {
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequestDto registerRequest) throws UserAlreadyRegisteredException, PasswordNotSecureException {
 
         log.info("POST api/auth/register called -> start the process register a new user with mail {}", registerRequest.getEmail());
 
@@ -82,8 +85,8 @@ public class AuthenticationController {
 
     @Operation(summary = "Get user information", description = "Return logged in user information")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", content = {@Content(mediaType = "application/json",
-                    schema = @Schema(implementation = UserDto.class))}),
+            @ApiResponse(responseCode = "200", content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = UserDto.class))),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content)})
     @SecurityRequirement(name = "Bearer Authentication")
     @GetMapping("/me")
@@ -96,8 +99,8 @@ public class AuthenticationController {
 
     @Operation(summary = "Check if email is already taken", description = "Return true if the email is already taken, otherwise false")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", content = {@Content(mediaType = "application/json",
-                    schema = @Schema(implementation = Boolean.class))}),
+            @ApiResponse(responseCode = "200", content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Boolean.class))),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content)})
     @SecurityRequirement(name = "Bearer Authentication")
     @GetMapping("email/{userMail}")
@@ -107,8 +110,8 @@ public class AuthenticationController {
 
     @Operation(summary = "Check if email is already taken", description = "Return true if the username is already taken, otherwise false")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", content = {@Content(mediaType = "application/json",
-                    schema = @Schema(implementation = Boolean.class))}),
+            @ApiResponse(responseCode = "200", content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Boolean.class))),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content)})
     @SecurityRequirement(name = "Bearer Authentication")
     @GetMapping("username/{userName}")

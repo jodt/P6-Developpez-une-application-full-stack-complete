@@ -24,4 +24,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>("bad request", HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(PasswordNotSecureException.class)
+    public ResponseEntity<String> handlePasswordNotSecure(PasswordNotSecureException ex) {
+        return new ResponseEntity<>("password not secure", HttpStatus.BAD_REQUEST);
+    }
+
 }

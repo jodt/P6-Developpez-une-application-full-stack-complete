@@ -2,17 +2,20 @@ package com.openclassrooms.mdd_api.service;
 
 import com.openclassrooms.mdd_api.dto.RegisterRequestDto;
 import com.openclassrooms.mdd_api.dto.UserDto;
+import com.openclassrooms.mdd_api.exception.PasswordNotSecureException;
 import com.openclassrooms.mdd_api.exception.ResourceNotFoundException;
 import com.openclassrooms.mdd_api.exception.UserAlreadyRegisteredException;
 import com.openclassrooms.mdd_api.mapper.UserMapper;
 import com.openclassrooms.mdd_api.model.User;
 import com.openclassrooms.mdd_api.repository.UserRepository;
+import com.openclassrooms.mdd_api.utils.PasswordUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 @Slf4j
 @Service
@@ -38,9 +41,14 @@ public class UserServiceImpl implements UserService {
      * @throws UserAlreadyRegisteredException if the email or username is already taken
      */
     @Override
-    public User addUser(RegisterRequestDto registerRequest) throws UserAlreadyRegisteredException {
+    public User addUser(RegisterRequestDto registerRequest) throws UserAlreadyRegisteredException, PasswordNotSecureException {
         log.info("Check if user is already registered");
         this.isUserAlreadyRegister(registerRequest.getEmail(), registerRequest.getUserName());
+
+        if(!PasswordUtils.isPasswordSecure(registerRequest.getPassword())) {
+            log.info("Password is not secure");
+            throw new PasswordNotSecureException();
+        }
 
         User userToSave = User.builder()
                 .userName(registerRequest.getUserName())
@@ -72,7 +80,7 @@ public class UserServiceImpl implements UserService {
      * @throws ResourceNotFoundException if user not found
      */
     @Override
-    public User updateUser(UserDto user) throws UserAlreadyRegisteredException, ResourceNotFoundException {
+    public User updateUser(UserDto user) throws UserAlreadyRegisteredException, ResourceNotFoundException, PasswordNotSecureException {
         User userToUpdate = this.getLoggedUser();
         User userUpdated = this.updateUser(userToUpdate, user);
         return this.userRepository.save(userUpdated);
@@ -158,7 +166,7 @@ public class UserServiceImpl implements UserService {
      * @return the updated user
      * @throws UserAlreadyRegisteredException if the username or email already exists in the database
      */
-    private User updateUser(User existitingUser, UserDto user) throws UserAlreadyRegisteredException {
+    private User updateUser(User existitingUser, UserDto user) throws UserAlreadyRegisteredException, PasswordNotSecureException {
         if (!existitingUser.getUserName().equals(user.getUserName())) {
             log.info("Username has changed, update user with username {}", user.getUserName());
             if (isUserNameAlreadyTaken(user.getUserName())) {
@@ -176,9 +184,15 @@ public class UserServiceImpl implements UserService {
         }
 
         if (user.getPassword() != null && !user.getPassword().isEmpty() && !passwordEncoder.matches(existitingUser.getPassword(), user.getPassword())) {
-            log.info("Password has changed, update new user password");
+            log.info("Password has changed, check if password is secure");
+
+            if(!PasswordUtils.isPasswordSecure(user.getPassword())) {
+                throw new PasswordNotSecureException();
+            }
+            log.info("Update user with new password");
             existitingUser.setPassword(passwordEncoder.encode(user.getPassword()));
         }
         return existitingUser;
     }
+
 }
