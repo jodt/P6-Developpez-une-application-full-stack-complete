@@ -9,7 +9,6 @@ export class FormValidationErrorService {
   constructor() {}
 
   public getErrorMessage(form: FormGroup, field: string): string | null {
-    console.log(form.get(field)?.errors);
     if (form.get(field)?.hasError('required')) {
       return 'Champ obligatoire';
     } else if (form.get(field)?.hasError('email')) {

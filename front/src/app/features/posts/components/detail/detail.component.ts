@@ -36,7 +36,6 @@ export class DetailComponent implements OnInit {
   public onSubmit(){
     if(this.commentForm.valid){
       const newComment = this.commentForm.getRawValue() as Comment;
-      console.log(newComment)
       this.postService.createComment(newComment).pipe(
         take(1)).subscribe({
           next: () => {

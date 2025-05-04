@@ -10,7 +10,6 @@ export class JwtInterceptor implements HttpInterceptor {
   constructor(private matSnackBar: MatSnackBar) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('Intercepted request:', request);  // Ajoute cette ligne pour vérifier si la requête est interceptée
 
     const token = localStorage.getItem('token');
     if (token) {

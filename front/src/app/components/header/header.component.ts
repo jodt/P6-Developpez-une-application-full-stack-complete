@@ -37,7 +37,6 @@ export class HeaderComponent implements OnInit {
 
   private displayToolBar() {
     this.showToolbar = (!this.isLogged && !this.isMobileResolution && (this.router.url.includes("register") || this.router.url.includes("login")) || this.isLogged);
-    console.log((this.router.url.includes("register")) || this.router.url.includes("login"))
   }
 
   private isMobile() {
