@@ -70,7 +70,7 @@ button:disabled svg {
 }
 
 @media (max-width: 768px) {
-  .card {
+  .card, .cards-container > .card:only-child {
     flex: 1 1 auto;
   }
 
