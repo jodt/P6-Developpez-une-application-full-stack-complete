@@ -1,0 +1,65 @@
+#register {
+  margin-top: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+}
+
+h2 {
+  margin-bottom: 2%;
+}
+
+
+.field {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  min-width: 300px;
+}
+
+.arrow{
+  position: absolute;
+  background-color: white;
+  border: none;
+}
+
+.register-button {
+  margin-top: 3%;
+}
+
+
+@media (max-width: 768px) {
+  #register {
+    height: 50%;
+    justify-content: space-around;
+  }
+
+  h2 {
+    margin-bottom: 10%;
+  }
+
+  .arrow {
+    top: 0;
+  }
+
+  svg {
+    height: 80px;
+    width: 80px;
+  }
+
+  .register-button {
+    width: 50%;
+    margin-top: 12%;
+  }
+}
+
+
